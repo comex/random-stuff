@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
     memset(&vn, 0, sizeof(vn));
     int fd = open(argv[1], O_RDONLY, 0);
     if(!fd) {
-        fprintf(stderr, "Could not open %s: %s", argv[1], strerror(errno));
+        fprintf(stderr, "Could not open %s: %s\n", argv[1], strerror(errno));
         return 1;
     }
     ioctl(fd, VNIOCDETACH, &vn);
@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
     vn.vn_control = vncontrol_readwrite_io_e;
     int ret = ioctl(fd, VNIOCATTACH, &vn);
     if(ret) {
-        fprintf(stderr, "VNIOCATTACH failed: %s", strerror(errno));
+        fprintf(stderr, "VNIOCATTACH failed: %s\n", strerror(errno));
         return 1;
     }
     close(fd);
